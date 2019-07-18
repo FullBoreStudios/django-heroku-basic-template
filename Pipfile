@@ -1,13 +1,16 @@
 [[source]]
-name = "pypi"
-url = "https://pypi.org/simple"
+url = "https://pypi.python.org/simple"
 verify_ssl = true
-
-[dev-packages]
-
-[packages]
-qdds = "*"
-django = "*"
+name = "pypi"
 
 [requires]
 python_version = "3.*"
+
+[packages]
+"psycopg2-binary" = "*"
+django-heroku = "*"
+gunicorn = "*"
+django = "*"
+qdds = "*"
+
+[dev-packages]
