@@ -1,22 +1,19 @@
-"""rootapp URL Configuration
+""" Extending URLS using include
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+For example, we include the "base" app's urls so we can create a homepage view with
+the base app, but if you want you can do something like:
+
+    path('base/', include(base.urls)),
+
+This would mean the homepage url pattern would now live at, yoursite.com/base/
+and the alternate bootstrap template would live at yoursite.com/base/bootstrap/
+
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('base.urls')), # Include url structure at root or base of site
 ]

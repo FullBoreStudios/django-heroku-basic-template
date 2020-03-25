@@ -29,6 +29,7 @@ DEBUG = True
 
 # Application definition
 
+# Default Apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +41,11 @@ INSTALLED_APPS = [
     # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+]
+
+# Custom Apps that you make!
+INSTALLED_APPS += [
+    'base'
 ]
 
 MIDDLEWARE = [
