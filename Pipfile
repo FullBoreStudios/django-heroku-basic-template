@@ -10,6 +10,6 @@ python_version = "3.*"
 django-heroku = "*"
 gunicorn = "*"
 qdds = "*"
-django = "==3.0.4"
+django = "==3.0.7"
 
 [dev-packages]
