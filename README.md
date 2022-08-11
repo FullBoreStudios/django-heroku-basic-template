@@ -18,6 +18,7 @@ Basic Django setup for deploying to heroku
   3. Change the readme code for the button below to link to the new url 
   of your repo.
   4. Click button and follow steps on Heroku
-  5. Get to work writing models, urls, and views with Django!
+  5. Adjust settings file to add custom domain
+  6. Get to work writing models, urls, and views with Django!
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy/?template=https://github.com/FullBoreStudios/django-heroku-basic-template)
