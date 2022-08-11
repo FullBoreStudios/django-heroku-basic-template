@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import dj_database_url
 import django_heroku
+import sys
+
+CUSTOM_DOMAIN_NAME = "yourdomain.com"
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,10 +26,18 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "44nigll81oix9qsbj_ur$g4v4ae=&hmtvvv+7t(as1c5g6dnb)"
+SECRET_KEY = F"44nigll81oix9qsbj_ur${CUSTOM_DOMAIN_NAME}g4v4ae=&hmtvvv+7t(as1c5g6dnb)"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+# Check if Heroku or Development (runserver)
+if (len(sys.argv) >= 2 and sys.argv[1] == 'runserver'):
+    DEBUG = True
+    #...
+else:
+    DEBUG = False
+    #...
 
 # Application definition
 
@@ -41,6 +53,7 @@ INSTALLED_APPS = [
     # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'debug_toolbar',
 ]
 
 # Custom Apps that you make!
@@ -121,8 +134,6 @@ DATABASES['default'].update(dj_database_url.config(conn_max_age=500, ssl_require
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Allow all host headers
-ALLOWED_HOSTS = ['*']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -141,3 +152,20 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    F'*.{CUSTOM_DOMAIN_NAME}',
+]
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+CSRF_TRUSTED_ORIGINS=[F'https://*.{CUSTOM_DOMAIN_NAME}']
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
